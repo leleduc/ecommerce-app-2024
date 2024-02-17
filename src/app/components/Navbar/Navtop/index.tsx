@@ -15,7 +15,7 @@ const Navtop = () => {
         {/* Site Logo */}
         <div>
           <Link
-            href={'/'}
+            href={''}
             className="flex items-center gap-2 font-bold text-2xl sm:text-3xl"
           >
             <Image src={Logo} width={40} height={40} alt="logo"></Image>
