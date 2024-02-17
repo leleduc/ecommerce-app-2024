@@ -6,14 +6,29 @@ import Darkbtn from '../../../assets/website/dark-mode-button.png';
 import Image from 'next/image';
 
 const Darkmode = () => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
-  );
+  const [theme, setTheme] = useState('light');
 
   const element = document.documentElement;
   //   console.log(element);
 
+  //   useEffect(() => {
+  //     if (theme == 'dark') {
+  //       element.classList.add('dark');
+  //       localStorage.setItem('theme', 'dark');
+  //     } else {
+  //       element.classList.remove('dark');
+  //       localStorage.setItem('theme', 'light');
+  //     }
+  //   }, [theme]);
   useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme == 'light' ? 'dark' : 'light');
     if (theme == 'dark') {
       element.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -21,7 +36,7 @@ const Darkmode = () => {
       element.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-  }, [theme]);
+  };
 
   return (
     <div className="relative">
@@ -33,7 +48,7 @@ const Darkmode = () => {
         height={30}
         alt="Light Mode"
         src={Lightbtn}
-        onClick={() => setTheme(theme == 'light' ? 'dark' : 'light')}
+        onClick={toggleTheme}
       />
       <Image
         className="drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300 cursor-pointer"
@@ -41,7 +56,7 @@ const Darkmode = () => {
         height={30}
         alt="Dark Mode"
         src={Darkbtn}
-        onClick={() => setTheme(theme == 'light' ? 'dark' : 'light')}
+        onClick={toggleTheme}
       />
     </div>
   );
