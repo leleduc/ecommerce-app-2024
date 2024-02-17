@@ -8,7 +8,6 @@ import Image from 'next/image';
 const Darkmode = () => {
   const [theme, setTheme] = useState('light');
 
-  const element = document.documentElement;
   //   console.log(element);
 
   //   useEffect(() => {
@@ -28,6 +27,7 @@ const Darkmode = () => {
   }, []);
 
   const toggleTheme = () => {
+    const element = document.documentElement;
     setTheme(theme == 'light' ? 'dark' : 'light');
     if (theme == 'dark') {
       element.classList.add('dark');
