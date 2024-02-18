@@ -5,44 +5,34 @@ import Lightbtn from '../../../assets/website/light-mode-button.png';
 import Darkbtn from '../../../assets/website/dark-mode-button.png';
 import Image from 'next/image';
 
-const Darkmode = () => {
-  const [theme, setTheme] = useState('light');
+type ToggleThemeProps = {
+  initialTheme?: 'light' | 'dark';
+};
+const Darkmode: React.FC<ToggleThemeProps> = ({ initialTheme = 'light' }) => {
+  const [isDarkMode, setIsDarkMode] = useState(initialTheme === 'dark');
 
-  //   console.log(element);
-
-  //   useEffect(() => {
-  //     if (theme == 'dark') {
-  //       element.classList.add('dark');
-  //       localStorage.setItem('theme', 'dark');
-  //     } else {
-  //       element.classList.remove('dark');
-  //       localStorage.setItem('theme', 'light');
-  //     }
-  //   }, [theme]);
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
+    setIsDarkMode(savedTheme === 'dark');
+    console.log(isDarkMode);
+
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
     }
   }, []);
 
   const toggleTheme = () => {
-    const element = document.documentElement;
-    setTheme(theme == 'light' ? 'dark' : 'light');
-    if (theme == 'dark') {
-      element.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      element.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    const newTheme = isDarkMode ? 'light' : 'dark';
+    setIsDarkMode(!isDarkMode);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark');
   };
 
   return (
     <div className="relative">
       <Image
         className={`absolute right-0 z-10 drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300 cursor-pointer ${
-          theme == 'dark' ? ' opacity-0' : ' opacity-100'
+          isDarkMode ? ' opacity-0' : ' opacity-100'
         }`}
         width={30}
         height={30}
