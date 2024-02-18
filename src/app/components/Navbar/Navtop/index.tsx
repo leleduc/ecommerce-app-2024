@@ -29,7 +29,7 @@ const Navtop = () => {
           <div className="hidden sm:block relative group">
             <input
               type="text"
-              className="w-[200px] sm:w-[200px] group-hover:w-[300px] text-sm px-2 py-1 border border-gray-300 focus:outline-none focus:border-1 focus:border-primary rounded-full transition-all duration-200"
+              className="w-[200px] sm:w-[200px] group-hover:w-[300px] text-sm px-2 py-1 border border-gray-300 dark:border-gray-500 dark:bg-gray-800 focus:outline-none focus:border-1 focus:border-primary rounded-full transition-all duration-200"
               placeholder="Search"
             />
             <GoSearch className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-500 group-hover:text-primary transition-all duration-200" />
